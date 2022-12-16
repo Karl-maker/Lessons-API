@@ -1,5 +1,6 @@
 const http = require("http");
 const express = require("express");
+const { controller_v1 } = require("./controllers");
 const config = require("../config");
 
 const app = express();
@@ -14,6 +15,7 @@ server = http.createServer(app);
 
 // Middlewares
 
+app.use("/api/v1", controller_v1.call({ express, app }, []));
 
 // Listener
 
