@@ -1,3 +1,6 @@
+const lesson = require("../controllers/lesson");
+const package = require("../controllers/package");
+
 /**
  * @desc Controls routes for all models / entities
  * @param app Express.js app
@@ -5,17 +8,16 @@
  */
 
 function controller_v1(express) {
+  const router = this.express.Router();
 
-    const router = this.express.Router();
+  router.use(
+    lesson.call({ express: this.express }),
+    package.call({ express: this.express })
+  );
 
-    router.get("/", (req, res, next) => {
-        res.json({ message: "Hello World" });
-    });
-
-    return router;
-
+  return router;
 }
 
-module.exports = { 
-    controller_v1
- };
+module.exports = {
+  controller_v1,
+};

@@ -15,10 +15,10 @@ server = http.createServer(app);
 
 // Middlewares
 
-app.use("/api/v1", controller_v1.call({ express, app }, []));
+app.use("/api/v1", controller_v1.call({ express, app }));
 
 // Listener
 
 server.listen(PORT, () => {
-    console.log(`Listening on port: ${PORT}`);
-})
+  console.log(`Listening on port: ${PORT}`);
+});
