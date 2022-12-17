@@ -11,7 +11,7 @@ module.exports = function LessonRoutes() {
   const router = this.express.Router();
 
   router.post(`${ROUTE}/`, auth.user.call({ strict: true }), createLesson);
-  router.get(`${ROUTE}/:id`, auth.user.call({ strict: true }), getLesson);
+  router.get(`${ROUTE}/:id`, auth.user.call({ strict: false }), getLesson);
   router.put(`${ROUTE}/:id`, auth.user.call({ strict: true }), updateLesson);
   router.delete(`${ROUTE}/:id`, auth.user.call({ strict: true }), deleteLesson);
   router.get(`${ROUTE}s/`, auth.user.call({ strict: false }), getAllLesson);

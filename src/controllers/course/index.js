@@ -1,4 +1,5 @@
 const { Course } = require("../../services");
+const auth = require("../../auth");
 const ROUTE = "/course";
 
 /**
@@ -9,11 +10,11 @@ const ROUTE = "/course";
 module.exports = function CourseRoutes() {
   const router = this.express.Router();
 
-  router.post(`${ROUTE}/`, createCourse);
-  router.get(`${ROUTE}/:id`, getCourse);
-  router.put(`${ROUTE}/:id`, updateCourse);
-  router.delete(`${ROUTE}/:id`, deleteCourse);
-  router.get(`${ROUTE}s/`, getAllCourses);
+  router.post(`${ROUTE}/`, auth.user.call({ strict: true }), createCourse);
+  router.get(`${ROUTE}/:id`, auth.user.call({ strict: false }), getCourse);
+  router.put(`${ROUTE}/:id`, auth.user.call({ strict: true }), updateCourse);
+  router.delete(`${ROUTE}/:id`, auth.user.call({ strict: true }), deleteCourse);
+  router.get(`${ROUTE}s/`, auth.user.call({ strict: false }), getAllCourses);
 
   return router;
 
