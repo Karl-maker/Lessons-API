@@ -1,5 +1,5 @@
-const lesson = require("../controllers/lesson");
-const package = require("../controllers/package");
+const lesson = require("./lesson");
+const course = require("./course");
 
 /**
  * @desc Controls routes for all models / entities
@@ -12,7 +12,7 @@ function controller_v1(express) {
 
   router.use(
     lesson.call({ express: this.express }),
-    package.call({ express: this.express })
+    course.call({ express: this.express })
   );
 
   return router;
