@@ -11,9 +11,21 @@ module.exports = function LessonRoutes() {
   const router = this.express.Router();
 
   router.post(`${ROUTE}/`, auth.user.call({ strict: true }), createLesson);
-  router.get(`${ROUTE}/:id`, auth.user.call({ strict: false }), getLesson);
-  router.put(`${ROUTE}/:id`, auth.user.call({ strict: true }), updateLesson);
-  router.delete(`${ROUTE}/:id`, auth.user.call({ strict: true }), deleteLesson);
+  router.get(
+    `${ROUTE}/:lesson_id`,
+    auth.user.call({ strict: false }),
+    getLesson
+  );
+  router.put(
+    `${ROUTE}/:lesson_id`,
+    auth.user.call({ strict: true }),
+    updateLesson
+  );
+  router.delete(
+    `${ROUTE}/:lesson_id`,
+    auth.user.call({ strict: true }),
+    deleteLesson
+  );
   router.get(`${ROUTE}s/`, auth.user.call({ strict: false }), getAllLesson);
 
   return router;
@@ -24,7 +36,7 @@ module.exports = function LessonRoutes() {
     const options = req.query;
 
     Lesson.getAll(options)
-      .then((results) => {
+      .then(({ results }) => {
         res.json(results);
       })
       .catch((err) => {
@@ -33,11 +45,11 @@ module.exports = function LessonRoutes() {
   }
 
   function getLesson(req, res, next) {
-    const { id } = req.params;
+    const { lesson_id } = req.params;
     const options = req.query;
 
-    Lesson.getOneById(id, options)
-      .then((results) => {
+    Lesson.getOneById(lesson_id, options)
+      .then(({ results }) => {
         res.json(results);
       })
       .catch((err) => {
@@ -46,11 +58,11 @@ module.exports = function LessonRoutes() {
   }
 
   function updateLesson(req, res, next) {
-    const { id } = req.params;
+    const { lesson_id } = req.params;
     const options = req.body;
 
-    Lesson.update(id, options)
-      .then((results) => {
+    Lesson.update(lesson_id, options)
+      .then(({ results }) => {
         res.json(results);
       })
       .catch((err) => {
@@ -62,7 +74,7 @@ module.exports = function LessonRoutes() {
     const options = req.body;
 
     Lesson.create(options)
-      .then((results) => {
+      .then(({ results }) => {
         res.json(results);
       })
       .catch((err) => {
@@ -71,10 +83,10 @@ module.exports = function LessonRoutes() {
   }
 
   function deleteLesson(req, res, next) {
-    const { id } = req.params;
+    const { lesson_id } = req.params;
 
-    Lesson.delete(id)
-      .then((results) => {
+    Lesson.delete(lesson_id)
+      .then(({ results }) => {
         res.json(results);
       })
       .catch((err) => {

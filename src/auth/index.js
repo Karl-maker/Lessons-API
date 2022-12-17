@@ -1,5 +1,6 @@
 module.exports = {
   user,
+  grant_access,
 };
 
 /**
@@ -12,6 +13,13 @@ function user() {
   return (req, res, next) => {
     console.log(strict);
 
+    next();
+  };
+}
+
+function grant_access(parameter = "params", key = "user_id") {
+  return function (req, res, next) {
+    console.log(req[parameter][key]);
     next();
   };
 }
