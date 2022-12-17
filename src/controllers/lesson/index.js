@@ -1,4 +1,5 @@
 const { Lesson } = require("../../services");
+const auth = require("../../auth");
 const ROUTE = "/lesson";
 
 /**
@@ -9,11 +10,11 @@ const ROUTE = "/lesson";
 module.exports = function LessonRoutes() {
   const router = this.express.Router();
 
-  router.post(`${ROUTE}/`, createLesson);
-  router.get(`${ROUTE}/:id`, getLesson);
-  router.put(`${ROUTE}/:id`, updateLesson);
-  router.delete(`${ROUTE}/:id`, deleteLesson);
-  router.get(`${ROUTE}s/`, getAllLesson);
+  router.post(`${ROUTE}/`, auth.user.call({ strict: true }), createLesson);
+  router.get(`${ROUTE}/:id`, auth.user.call({ strict: true }), getLesson);
+  router.put(`${ROUTE}/:id`, auth.user.call({ strict: true }), updateLesson);
+  router.delete(`${ROUTE}/:id`, auth.user.call({ strict: true }), deleteLesson);
+  router.get(`${ROUTE}s/`, auth.user.call({ strict: false }), getAllLesson);
 
   return router;
 
