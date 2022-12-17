@@ -1,4 +1,3 @@
-const { Lesson } = require("../../services");
 const ROUTE = "/course";
 
 /**
@@ -19,65 +18,13 @@ module.exports = function CourseRoutes() {
 
   // Methods
 
-  function getAllCourses(req, res, next) {
-    const options = req.query;
+  function getAllCourses(req, res, next) {}
 
-    Lesson.getAll(options)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
+  function getCourse(req, res, next) {}
 
-  function getCourse(req, res, next) {
-    const { id } = req.params;
-    const options = req.query;
+  function updateCourse(req, res, next) {}
 
-    Lesson.getOneById(id, options)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
+  function createCourse(req, res, next) {}
 
-  function updateCourse(req, res, next) {
-    const { id } = req.params;
-    const options = req.body;
-
-    Lesson.update(id, options)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
-
-  function createCourse(req, res, next) {
-    const options = req.body;
-
-    Lesson.create(options)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
-
-  function deleteCourse(req, res, next) {
-    const { id } = req.params;
-
-    Lesson.delete(id)
-      .then((results) => {
-        res.json(results);
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
+  function deleteCourse(req, res, next) {}
 };
